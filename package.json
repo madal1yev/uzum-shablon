@@ -1,0 +1,47 @@
+{
+  "name": "marketpix",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MarketPix AI — marketplace product image generation SaaS",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "build": "npm run build -w @marketpix/shared-types && npm run build -w @marketpix/config && npm run build -w @marketpix/validation && npm run build -w @marketpix/localization && npm run build -w @marketpix/api && npm run build -w @marketpix/web && npm run build -w @marketpix/telegram-bot",
+    "dev": "npm run dev:web",
+    "dev:api": "npm run start:dev -w @marketpix/api",
+    "dev:web": "npm run dev -w @marketpix/web",
+    "dev:bot": "npm run start:dev -w @marketpix/telegram-bot",
+    "typecheck": "tsc -b --pretty false",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:migrate": "npm run prisma:migrate -w @marketpix/api",
+    "db:deploy": "npm run prisma:deploy -w @marketpix/api",
+    "db:studio": "npm run prisma:studio -w @marketpix/api",
+    "db:seed": "npm run seed -w @marketpix/api",
+    "check": "npm run lint && npm run typecheck && npm run test"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "eslint": "^9.39.1",
+    "prettier": "^3.9.10",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.4",
+    "vitest": "^3.2.7"
+  },
+  "allowScripts": {
+    "prisma@6.19.3": true,
+    "@prisma/client@6.19.3": true,
+    "@prisma/engines@6.19.3": true,
+    "esbuild@0.28.2": true,
+    "@scarf/scarf": false,
+    "msgpackr-extract": false
+  }
+}
